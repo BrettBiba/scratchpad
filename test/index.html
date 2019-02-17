@@ -71,6 +71,12 @@ body { margin:0; padding:0; }
 			geocodes.push(coordinateFeature(coord2, coord1));
 		}
  
+ 
+ 		var popup = new mapboxgl.Popup({closeOnClick: false})
+			.setLngLat([-96, 37.8])
+			.setHTML('<h1>Hello World!</h1>')
+			.addTo(map);
+
 		return geocodes;
 	};
  
