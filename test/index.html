@@ -38,6 +38,11 @@ body { margin:0; padding:0; }
 		}
  
 		function coordinateFeature(lng, lat) {
+			var popup = new mapboxgl.Popup({closeOnClick: false})
+			.setLngLat([0,0])
+			.setHTML(JSON.stringify(lat) + ',' + JSON.stringify(lng))
+			.addTo(map);
+			
 			return {
 				center: [lng, lat],
 				geometry: {
@@ -71,10 +76,7 @@ body { margin:0; padding:0; }
 			geocodes.push(coordinateFeature(coord2, coord1));
 		}
  
-  		var popup = new mapboxgl.Popup({closeOnClick: false})
-			.setLngLat([0,0])
-			.setHTML(JSON.stringify(coord1) + ',' + JSON.stringify(coord2))
-			.addTo(map);	
+	
 	
 
 
