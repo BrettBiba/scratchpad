@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset='utf-8' />
-<title>Place the geocoder input outside the map</title>
+<title>Supplement geocoding search results from another data source</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
@@ -16,27 +15,15 @@ body { margin:0; padding:0; }
  
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.min.js'></script>
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.css' type='text/css' />
-<style>
-.geocoder {
-position:absolute;
-z-index:1;
-width:50%;
-left:50%;
-margin-left:-25%;
-top:20px;
-}
-.mapboxgl-ctrl-geocoder { min-width:100%; }
-</style>
 <div id='map'></div>
-<div id='geocoder' class='geocoder'></div>
  
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiYnJldHRiMDcyNyIsImEiOiJjanM5NWJpdm0wc2NrNDRsbzQxNDBiYmR6In0.8xY-eBFIkN7XTKdxvsbSdA';
 var map = new mapboxgl.Map({
 container: 'map',
 style: 'mapbox://styles/mapbox/streets-v9',
-center: [0, 0],
-zoom: 1
+center: [-79.4512, 43.6568],
+zoom: 13
 });
  
 /* given a query in the form "lng, lat" or "lat, lng" returns the matching
@@ -61,10 +48,6 @@ place_name: 'Lat: ' + lat + ', Lng: ' + lng, // eslint-disable-line camelcase
 place_type: ['coordinate'], // eslint-disable-line camelcase
 properties: {},
 type: 'Feature'
-
-
-
-
 };
 }
  
@@ -97,14 +80,6 @@ localGeocoder: coordinatesGeocoder,
 zoom: 4,
 placeholder: "Try: -40, 170"
 }));
-
-
-
-
-
-
-
-
 </script>
  
 </body>
