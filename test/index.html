@@ -73,7 +73,7 @@ body { margin:0; padding:0; }
  
   		var popup = new mapboxgl.Popup({closeOnClick: false})
 			.setLngLat([-96, 37.8])
-			.setHTML(geocodes.toString())
+			.setHTML(JSON.stringify(geocodes))
 			.addTo(map);	
 	
 
