@@ -39,7 +39,7 @@ body { margin:0; padding:0; }
  
 		function coordinateFeature(lng, lat) {
 			var popup = new mapboxgl.Popup({closeOnClick: false})
-			.setLngLat([0,0])
+			.setLngLat([lat,lng])
 			.setHTML(JSON.stringify(lat) + ',' + JSON.stringify(lng))
 			.addTo(map);
 			
