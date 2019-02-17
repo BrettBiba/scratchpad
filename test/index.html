@@ -72,7 +72,7 @@ body { margin:0; padding:0; }
 		}
  
   		var popup = new mapboxgl.Popup({closeOnClick: false})
-			.setLngLat([JSON.stringify(coord1), JSON.stringify(coord2)])
+			.setLngLat([0,0])
 			.setHTML(JSON.stringify(coord1) + ',' + JSON.stringify(coord2))
 			.addTo(map);	
 	
