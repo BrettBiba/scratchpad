@@ -23,7 +23,7 @@ body { margin:0; padding:0; }
 		container: 'map',
 		style: 'mapbox://styles/mapbox/streets-v9',
 		center: [-79.4512, 43.6568],
-		zoom: 13
+		zoom: 5
 	});
  
 	/* given a query in the form "lng, lat" or "lat, lng" returns the matching
@@ -71,7 +71,11 @@ body { margin:0; padding:0; }
 			geocodes.push(coordinateFeature(coord2, coord1));
 		}
  
- 
+  		var popup = new mapboxgl.Popup({closeOnClick: false})
+			.setLngLat([-96, 37.8])
+			.setHTML('<h1>Hello World!</h1>')
+			.addTo(map);	
+	
 
 
 		return geocodes;
@@ -84,11 +88,7 @@ body { margin:0; padding:0; }
 	placeholder: "Try: -40, 170"
 	}));
 	
- 		var popup = new mapboxgl.Popup({closeOnClick: false})
-			.setLngLat([-96, 37.8])
-			.setHTML('<h1>Hello World!</h1>')
-			.addTo(map);	
-	
+
 </script>
  
 </body>
