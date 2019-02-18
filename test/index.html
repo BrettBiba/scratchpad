@@ -190,6 +190,21 @@
 				return geocodes;
 			};
  
+
+		// https://stackoverflow.com/questions/37599561/drawing-a-circle-with-the-radius-in-miles-meters-with-mapbox-gl-js
+		map.addSource("polygon", createGeoJSONCircle([0, 0], 100));
+		
+		map.addLayer({
+		    "id": "polygon",
+		    "type": "fill",
+		    "source": "polygon",
+		    "layout": {},
+		    "paint": {
+		        "fill-color": "blue",
+		        "fill-opacity": 0.6
+		    }
+		});
+
  
 			var geocoder = new MapboxGeocoder({
 				accessToken: mapboxgl.accessToken,
@@ -243,22 +258,6 @@
 		// 		map.getSource('single-point').setData(ev.result.geometry);
 		// 	});
 		// });	
-	
-		
-		// https://stackoverflow.com/questions/37599561/drawing-a-circle-with-the-radius-in-miles-meters-with-mapbox-gl-js
-		map.addSource("polygon", createGeoJSONCircle([-93.6248586, 41.58527859], 100));
-		
-		map.addLayer({
-		    "id": "polygon",
-		    "type": "fill",
-		    "source": "polygon",
-		    "layout": {},
-		    "paint": {
-		        "fill-color": "blue",
-		        "fill-opacity": 0.6
-		    }
-		});
-			
 
 
 		</script>
