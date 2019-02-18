@@ -1,190 +1,193 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset='utf-8' />
-<title>MapBox Test</title>
-<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
-<style>
-body { margin:0; padding:0; }
-#map { position:absolute; top:0; bottom:0; width:100%; }
-</style>
-</head>
-<body>
+	<head>
+		<meta charset='utf-8' />
+		<title>MapBox Test</title>
+		<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+		<style>
+			body { margin:0; padding:0; }
+			#map { position:absolute; top:0; bottom:0; width:100%; }
+		</style>
+	</head>
+	
+	<body>
 
-<style>
-.map-overlay {
-font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-position: absolute;
-width: 25%;
-top: 0;
-left: 0;
-padding: 10px;
-}
- 
-.map-overlay .map-overlay-inner {
-background-color: #fff;
-box-shadow:0 1px 2px rgba(0, 0, 0, 0.20);
-border-radius: 3px;
-padding: 10px;
-margin-bottom: 10px;
-}
- 
-.map-overlay h2 {
-line-height: 24px;
-display: block;
-margin: 0 0 10px;
-}
- 
-.map-overlay .legend .bar {
-height: 10px;
-width: 100%;
-background: linear-gradient(to right, #FCA107, #7F3121);
-}
- 
-.map-overlay input {
-background-color: transparent;
-display: inline-block;
-width: 100%;
-position: relative;
-margin: 0;
-cursor: ew-resize;
-}
-</style>
- 
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.min.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.css' type='text/css' />
-<div id='map'></div>
- 
- <div class='map-overlay top'>
-	<div class='map-overlay-inner'>
-		<h2>Time Since Cooldown Event</h2>
-		<label id='minutes'></label>
-		<input id='slider' type='range' min='0' max='120' step='1' value='0' />
-	</div>
-	<div class='map-overlay-inner'>
-		<div id='legend' class='legend'>
-			<div class='bar'></div>
-			<div>Magnitude (m)</div>
-		</div>
-	</div>
-</div>
- 
- 
- 
-<script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoiYnJldHRiMDcyNyIsImEiOiJjanM5NWJpdm0wc2NrNDRsbzQxNDBiYmR6In0.8xY-eBFIkN7XTKdxvsbSdA';
-	var map = new mapboxgl.Map({
-		container: 'map',
-		style: 'mapbox://styles/mapbox/streets-v9',
-		center: [-79.4512, 43.6568],
-		zoom: 1
-	});
- 
-	/* given a query in the form "lng, lat" or "lat, lng" returns the matching
-	* geographic coordinate(s) as search results in carmen geojson format,
-	* https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
-	*/
-	var coordinatesGeocoder = function (query) {
-		// match anything which looks like a decimal degrees coordinate pair
-		var matches = query.match(/^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i);
-		if (!matches) {
-			return null;
+	<style>
+		.map-overlay {
+			font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+			position: absolute;
+			width: 25%;
+			top: 0;
+			left: 0;
+			padding: 10px;
 		}
  
-		function coordinateFeature(lng, lat) {
+		.map-overlay .map-overlay-inner {
+			background-color: #fff;
+			box-shadow:0 1px 2px rgba(0, 0, 0, 0.20);
+			border-radius: 3px;
+			padding: 10px;
+			margin-bottom: 10px;
+		}
+ 
+		.map-overlay h2 {
+			line-height: 24px;
+			display: block;
+			margin: 0 0 10px;
+		}
+ 
+/* 
+		.map-overlay .legend .bar {
+			height: 10px;
+			width: 100%;
+			background: linear-gradient(to right, #FCA107, #7F3121);
+		}
+ */
+ 
+		.map-overlay input {
+			background-color: transparent;
+			display: inline-block;
+			width: 100%;
+			position: relative;
+			margin: 0;
+			cursor: ew-resize;
+		}
+	</style>
+ 
+	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.min.js'></script>
+	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.css' type='text/css' />
+	<div id='map'></div>
+ 
+	 <div class='map-overlay top'>
+		<div class='map-overlay-inner'>
+			<h2>Time Since Cooldown Event</h2>
+			<label id='minutes'></label>
+			<input id='slider' type='range' min='0' max='120' step='1' value='0' />
+		</div>
+<!-- 
+		<div class='map-overlay-inner'>
+			<div id='legend' class='legend'>
+				<div class='bar'></div>
+				<div>Magnitude (m)</div>
+			</div>
+		</div>
+ -->
+	</div>
+ 
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoiYnJldHRiMDcyNyIsImEiOiJjanM5NWJpdm0wc2NrNDRsbzQxNDBiYmR6In0.8xY-eBFIkN7XTKdxvsbSdA';
+		var map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/mapbox/streets-v9',
+			center: [-79.4512, 43.6568],
+			zoom: 1
+		});
+ 
+		/* given a query in the form "lng, lat" or "lat, lng" returns the matching
+		* geographic coordinate(s) as search results in carmen geojson format,
+		* https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
+		*/
+		var coordinatesGeocoder = function (query) {
+			// match anything which looks like a decimal degrees coordinate pair
+			var matches = query.match(/^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i);
+			if (!matches) {
+				return null;
+			}
+ 
+			function coordinateFeature(lng, lat) {
 
 			
-			return {
-				center: [lng, lat],
-				geometry: {
-				type: "Point",
-				coordinates: [lng, lat]
-				},
-				place_name: 'Lat: ' + lat + ', Lng: ' + lng, // eslint-disable-line camelcase
-				place_type: ['coordinate'], // eslint-disable-line camelcase
-				properties: {},
-				type: 'Feature'
-			};
-		}
+				return {
+					center: [lng, lat],
+					geometry: {
+					type: "Point",
+					coordinates: [lng, lat]
+					},
+					place_name: 'Lat: ' + lat + ', Lng: ' + lng, // eslint-disable-line camelcase
+					place_type: ['coordinate'], // eslint-disable-line camelcase
+					properties: {},
+					type: 'Feature'
+				};
+			}
  
-		var coord1 = Number(matches[1]);
-		var coord2 = Number(matches[2]);
-		var geocodes = [];
+			var coord1 = Number(matches[1]);
+			var coord2 = Number(matches[2]);
+			var geocodes = [];
  
-		if (coord1 < -90 || coord1 > 90) {
-			// must be lng, lat
-			geocodes.push(coordinateFeature(coord1, coord2));
-		}
+			if (coord1 < -90 || coord1 > 90) {
+				// must be lng, lat
+				geocodes.push(coordinateFeature(coord1, coord2));
+			}
  
-		if (coord2 < -90 || coord2 > 90) {
-			// must be lat, lng
-			geocodes.push(coordinateFeature(coord2, coord1));
-		}
+			if (coord2 < -90 || coord2 > 90) {
+				// must be lat, lng
+				geocodes.push(coordinateFeature(coord2, coord1));
+			}
  
-		if (geocodes.length === 0) {
-			// else could be either lng, lat or lat, lng
-			geocodes.push(coordinateFeature(coord1, coord2));
-			geocodes.push(coordinateFeature(coord2, coord1));
-		}
+			if (geocodes.length === 0) {
+				// else could be either lng, lat or lat, lng
+				geocodes.push(coordinateFeature(coord1, coord2));
+				geocodes.push(coordinateFeature(coord2, coord1));
+			}
  
-		return geocodes;
-	};
+			return geocodes;
+		};
  
  
- 	var geocoder = new MapboxGeocoder({
-		accessToken: mapboxgl.accessToken,
-		localGeocoder: coordinatesGeocoder,
-		zoom: 1,
-		placeholder: "Try: -40, 170"
-	});
+		var geocoder = new MapboxGeocoder({
+			accessToken: mapboxgl.accessToken,
+			localGeocoder: coordinatesGeocoder,
+			zoom: 1,
+			placeholder: "Try: -40, 170"
+		});
 	
-	geocoder.on('result', function(result) {
-   		var popup = new mapboxgl.Popup({closeOnClick: false})
-			.setLngLat(result.result.geometry.coordinates)
-			.setHTML(JSON.stringify(result.result.geometry.coordinates))
-			.addTo(map);
-	})
+		geocoder.on('result', function(result) {
+			var popup = new mapboxgl.Popup({closeOnClick: false})
+				.setLngLat(result.result.geometry.coordinates)
+				.setHTML(JSON.stringify(result.result.geometry.coordinates))
+				.addTo(map);
+		})
 	
-// 	geocoder.on('result', function(result) {
-// 		map.getSource('single-point').setData(resultev.result.geometry);
-// 	});
-//  
- 	map.addControl(geocoder);
-// 	
-// 	
-// 	// After the map style has loaded on the page, add a source layer and default
-// 	// styling for a single point.
-// 	map.on('load', function() {
-// 		map.addSource('single-point', {
-// 		"type": "geojson",
-// 		"data": {
-// 		"type": "FeatureCollection",
-// 		"features": []
-// 		}
-// 	});
-// 	 
-// 	map.addLayer({
-// 		"id": "point",
-// 		"source": "single-point",
-// 		"type": "circle",
-// 		"paint": {
-// 		"circle-radius": 1000,
-// 		"circle-color": "#007cbf"
-// 	}
-// 	});
-// 	 
-// 	// Listen for the `result` event from the MapboxGeocoder that is triggered when a user
-// 	// makes a selection and add a symbol that matches the result.
-// 	geocoder.on('result', function(ev) {
-// 		map.getSource('single-point').setData(ev.result.geometry);
-// 	});
-// });	
+	// 	geocoder.on('result', function(result) {
+	// 		map.getSource('single-point').setData(resultev.result.geometry);
+	// 	});
+	//  
+		map.addControl(geocoder);
+	// 	
+	// 	
+	// 	// After the map style has loaded on the page, add a source layer and default
+	// 	// styling for a single point.
+	// 	map.on('load', function() {
+	// 		map.addSource('single-point', {
+	// 		"type": "geojson",
+	// 		"data": {
+	// 		"type": "FeatureCollection",
+	// 		"features": []
+	// 		}
+	// 	});
+	// 	 
+	// 	map.addLayer({
+	// 		"id": "point",
+	// 		"source": "single-point",
+	// 		"type": "circle",
+	// 		"paint": {
+	// 		"circle-radius": 1000,
+	// 		"circle-color": "#007cbf"
+	// 	}
+	// 	});
+	// 	 
+	// 	// Listen for the `result` event from the MapboxGeocoder that is triggered when a user
+	// 	// makes a selection and add a symbol that matches the result.
+	// 	geocoder.on('result', function(ev) {
+	// 		map.getSource('single-point').setData(ev.result.geometry);
+	// 	});
+	// });	
 	
 	
 
-</script>
+	</script>
  
-</body>
+	</body>
 </html>
