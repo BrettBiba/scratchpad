@@ -258,7 +258,14 @@
 		// 		map.getSource('single-point').setData(ev.result.geometry);
 		// 	});
 		// });	
+		
+		var center = [0, 0];
+var radius = 5000;
+var options = {steps: 10, units: 'kilometers', properties: {foo: 'bar'}};
+var circle = turf.circle(center, radius, options);
 
+//addToMap
+var addToMap = [turf.point(center), circle]
 
 		</script>
  
