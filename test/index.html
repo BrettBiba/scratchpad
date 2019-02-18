@@ -73,13 +73,6 @@ body { margin:0; padding:0; }
 			geocodes.push(coordinateFeature(coord2, coord1));
 		}
  
-	
-// 			var popup = new mapboxgl.Popup({closeOnClick: false})
-// 			.setLngLat([coord1,coord2])
-// 			.setHTML(JSON.stringify(coord1) + ',' + JSON.stringify(coord2))
-// 			.addTo(map);
-
-
 		return geocodes;
 	};
  
@@ -91,13 +84,12 @@ body { margin:0; padding:0; }
 		placeholder: "Try: -40, 170"
 	});
 	
-	geocoder.on('result', function(result) {
-   		var popup = new mapboxgl.Popup({closeOnClick: false})
-			.setLngLat(result.result.geometry.coordinates)
-			.setHTML(JSON.stringify(result.result.geometry.coordinates))
-			.addTo(map);
-
-	})
+// 	geocoder.on('result', function(result) {
+//    		var popup = new mapboxgl.Popup({closeOnClick: false})
+// 			.setLngLat(result.result.geometry.coordinates)
+// 			.setHTML(JSON.stringify(result.result.geometry.coordinates))
+// 			.addTo(map);
+// 	})
 	
 	geocoder.on('result', function(result) {
 		map.getSource('single-point').setData(resultev.result.geometry);
