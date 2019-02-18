@@ -162,6 +162,7 @@
 			geocoder.on('result', function(result) {
 				document.getElementById('slider').addEventListener('input', function(e) {
 				var time = parseInt(e.target.value, 10);
+				});
 
 				var popup = new mapboxgl.Popup({closeOnClick: false})
 					.setLngLat(result.result.geometry.coordinates)
