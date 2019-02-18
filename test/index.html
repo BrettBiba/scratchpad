@@ -83,12 +83,24 @@ body { margin:0; padding:0; }
 		return geocodes;
 	};
  
-	map.addControl(new MapboxGeocoder({
-	accessToken: mapboxgl.accessToken,
-	localGeocoder: coordinatesGeocoder,
-	zoom: 0,
-	placeholder: "Try: -40, 170"
-	}));
+ 
+ 	var geocoder = new MapboxGeocoder({
+		accessToken: mapboxgl.accessToken,
+		localGeocoder: coordinatesGeocoder,
+		zoom: 2,
+		placeholder: "Try: -40, 170"
+	});
+	
+	geocoder.on('results', function(results) {
+   		var popup = new mapboxgl.Popup({closeOnClick: false})
+			.setLngLat([0,0])
+			.setHTML('Hello')
+			.addTo(map);
+
+	})
+ 
+	map.addControl(geocoder);
+	
 	
 
 </script>
