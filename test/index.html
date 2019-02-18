@@ -98,6 +98,10 @@ body { margin:0; padding:0; }
 			.addTo(map);
 
 	})
+	
+	geocoder.on('result', function(result) {
+		map.getSource('single-point').setData(resultev.result.geometry);
+	});
  
 	map.addControl(geocoder);
 	
