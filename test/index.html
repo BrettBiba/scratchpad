@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset='utf-8' />
-		<title>MapBox Test</title>
+		<title>MapBox Tester</title>
 		<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
@@ -93,7 +93,9 @@
 		</div>
  
 		<script>
+			
 			mapboxgl.accessToken = 'pk.eyJ1IjoiYnJldHRiMDcyNyIsImEiOiJjanM5NWJpdm0wc2NrNDRsbzQxNDBiYmR6In0.8xY-eBFIkN7XTKdxvsbSdA';
+			
 			var map = new mapboxgl.Map({
 				container: 'map',
 				style: 'mapbox://styles/mapbox/streets-v9',
@@ -192,18 +194,18 @@
  
 
 		// https://stackoverflow.com/questions/37599561/drawing-a-circle-with-the-radius-in-miles-meters-with-mapbox-gl-js
-		map.addSource("polygon", createGeoJSONCircle([0, 0], 10000));
-		
-		map.addLayer({
-		    "id": "polygon",
-		    "type": "fill",
-		    "source": "polygon",
-		    "layout": {},
-		    "paint": {
-		        "fill-color": "blue",
-		        "fill-opacity": 0.6
-		    }
-		});
+// 		map.addSource("polygon", createGeoJSONCircle([0, 0], 10000));
+// 		
+// 		map.addLayer({
+// 		    "id": "polygon",
+// 		    "type": "fill",
+// 		    "source": "polygon",
+// 		    "layout": {},
+// 		    "paint": {
+// 		        "fill-color": "blue",
+// 		        "fill-opacity": 0.6
+// 		    }
+// 		});
 
  
 			var geocoder = new MapboxGeocoder({
