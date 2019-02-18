@@ -91,10 +91,10 @@ body { margin:0; padding:0; }
 		placeholder: "Try: -40, 170"
 	});
 	
-	geocoder.on('results', function(results) {
+	geocoder.on('result', function(result) {
    		var popup = new mapboxgl.Popup({closeOnClick: false})
 			.setLngLat([0,0])
-			.setHTML(JSON.stringify(results))
+			.setHTML(JSON.stringify(result))
 			.addTo(map);
 
 	})
