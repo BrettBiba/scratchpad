@@ -138,7 +138,8 @@
 						 }]
 					 }
 				 };
- 
+ 			};
+ 			
 			/* given a query in the form "lng, lat" or "lat, lng" returns the matching
 			* geographic coordinate(s) as search results in carmen geojson format,
 			* https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
@@ -245,7 +246,7 @@
 	
 		
 		// https://stackoverflow.com/questions/37599561/drawing-a-circle-with-the-radius-in-miles-meters-with-mapbox-gl-js
-		map.addSource("polygon", createGeoJSONCircle([-93.6248586, 41.58527859], 0.5));
+		map.addSource("polygon", createGeoJSONCircle([-93.6248586, 41.58527859], 1000));
 		
 		map.addLayer({
 		    "id": "polygon",
