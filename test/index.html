@@ -94,7 +94,7 @@ body { margin:0; padding:0; }
 	geocoder.on('results', function(results) {
    		var popup = new mapboxgl.Popup({closeOnClick: false})
 			.setLngLat([0,0])
-			.setHTML(JSON.stringify(geocoder.result()))
+			.setHTML(JSON.stringify(results))
 			.addTo(map);
 
 	})
