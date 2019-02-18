@@ -17,6 +17,22 @@ body { margin:0; padding:0; }
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.0/mapbox-gl-geocoder.css' type='text/css' />
 <div id='map'></div>
  
+ <div class='map-overlay top'>
+	<div class='map-overlay-inner'>
+		<h2>Time Since Cooldown Event</h2>
+		<label id='minutes'></label>
+		<input id='slider' type='range' min='0' max='120' step='1' value='0' />
+	</div>
+	<div class='map-overlay-inner'>
+		<div id='legend' class='legend'>
+			<div class='bar'></div>
+			<div>Magnitude (m)</div>
+		</div>
+	</div>
+</div>
+ 
+ 
+ 
 <script>
 	mapboxgl.accessToken = 'pk.eyJ1IjoiYnJldHRiMDcyNyIsImEiOiJjanM5NWJpdm0wc2NrNDRsbzQxNDBiYmR6In0.8xY-eBFIkN7XTKdxvsbSdA';
 	var map = new mapboxgl.Map({
