@@ -166,7 +166,7 @@
 
 				var popup = new mapboxgl.Popup({closeOnClick: false})
 					.setLngLat(result.result.geometry.coordinates)
-					.setHTML(JSON.stringify(result.result.geometry.coordinates))
+					.setHTML(time)//JSON.stringify(result.result.geometry.coordinates))
 					.addTo(map);
 			})
 	
