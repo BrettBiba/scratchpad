@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset='utf-8' />
-<title>MapBox Test Minutes</title>
+<title>MapBox Tester</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
@@ -84,46 +84,46 @@ body { margin:0; padding:0; }
 		placeholder: "Try: -40, 170"
 	});
 	
-// 	geocoder.on('result', function(result) {
-//    		var popup = new mapboxgl.Popup({closeOnClick: false})
-// 			.setLngLat(result.result.geometry.coordinates)
-// 			.setHTML(JSON.stringify(result.result.geometry.coordinates))
-// 			.addTo(map);
-// 	})
-	
 	geocoder.on('result', function(result) {
-		map.getSource('single-point').setData(resultev.result.geometry);
-	});
- 
-	map.addControl(geocoder);
+   		var popup = new mapboxgl.Popup({closeOnClick: false})
+			.setLngLat(result.result.geometry.coordinates)
+			.setHTML(JSON.stringify(result.result.geometry.coordinates))
+			.addTo(map);
+	})
 	
-	
-	// After the map style has loaded on the page, add a source layer and default
-	// styling for a single point.
-	map.on('load', function() {
-		map.addSource('single-point', {
-		"type": "geojson",
-		"data": {
-		"type": "FeatureCollection",
-		"features": []
-		}
-	});
-	 
-	map.addLayer({
-		"id": "point",
-		"source": "single-point",
-		"type": "circle",
-		"paint": {
-		"circle-radius": 10,
-		"circle-color": "#007cbf"
-	}
-	});
-	 
-	// Listen for the `result` event from the MapboxGeocoder that is triggered when a user
-	// makes a selection and add a symbol that matches the result.
-	geocoder.on('result', function(ev) {
-		map.getSource('single-point').setData(ev.result.geometry);
-	});
+// 	geocoder.on('result', function(result) {
+// 		map.getSource('single-point').setData(resultev.result.geometry);
+// 	});
+//  
+// 	map.addControl(geocoder);
+// 	
+// 	
+// 	// After the map style has loaded on the page, add a source layer and default
+// 	// styling for a single point.
+// 	map.on('load', function() {
+// 		map.addSource('single-point', {
+// 		"type": "geojson",
+// 		"data": {
+// 		"type": "FeatureCollection",
+// 		"features": []
+// 		}
+// 	});
+// 	 
+// 	map.addLayer({
+// 		"id": "point",
+// 		"source": "single-point",
+// 		"type": "circle",
+// 		"paint": {
+// 		"circle-radius": 1000,
+// 		"circle-color": "#007cbf"
+// 	}
+// 	});
+// 	 
+// 	// Listen for the `result` event from the MapboxGeocoder that is triggered when a user
+// 	// makes a selection and add a symbol that matches the result.
+// 	geocoder.on('result', function(ev) {
+// 		map.getSource('single-point').setData(ev.result.geometry);
+// 	});
 
 });	
 	
